@@ -1,0 +1,53 @@
+# config.yaml
+# MPC控制器基本参数
+mpc_params:
+  horizon: 5     # 预测时域
+  T_S: 0.1           # 采样时间
+  # N_p: 20            # 预测步长
+  pre_time: 0.5    # 预瞄时间
+  T_L: 0.5         # 第二采样时间
+  is_variable_time: Flase # 是否变采样时间 True  False
+  t_ratio: 0.5     # LS采样时间比例
+
+vehicle_params:
+  Veh_m: 1575      # 车辆质量(kg)
+  Veh_lf: 1.2      # 前轴到质心的距离(m)
+  Veh_lr: 1.6      # 后轴到质心的距离(m)
+  Veh_Iz: 2875     # 车辆绕z轴的转动惯量(kg*m^2)
+  Veh_l: 2.6       # 车辆轴距(m)
+  Veh_W: 1.8      # 车辆宽度(m)
+  Veh_L: 4.8       # 车辆长度(m)
+  # Cf_0: -155495    # 前轮侧偏刚度
+  # Cr_0: -155495    # 后轮侧偏刚度
+
+# 轮胎参数
+tire_params:
+  aopt_f: 0.3490658503988659  # 20度，前轮最优侧偏角(rad)
+  aopt_r: 0.19198621771937624  # 11度，后轮最优侧偏角(rad)
+  Cf_0: -50000 # -155495    # 前轮侧偏刚度
+  Cr_0: -50000 # -155495    # 后轮侧偏刚度
+
+# 运动学约束
+kinematics_constraints:
+  vx_max: 40.0     # 最大纵向速度(m/s)
+  vx_min: 0.0    # 最小纵向速度(m/s)
+  ax_max: 3.0  # 2 * sqrt(2) 最大纵向加速度(m/s^2)
+  ax_min: -3.0  # -2 * sqrt(2) 最小纵向加速度(m/s^2)
+  df_max: 35  # pi/6 最大前轮转向角(rad)  这里用度数，调用时会转化弧度
+  df_min: -35  # -pi/6 最小前轮转向角(rad)
+  Y_max: 5  # 最大侧向位移(m)
+  Y_min: -1  # 最小侧向位移(m)
+
+
+# 动力学约束
+dynamics_constraints:
+  vy_max: 5.0     # 最大横向速度(m/s)
+  vy_min: -5.0    # 最小横向速度(m/s)
+  jerk_min: -3.0   # 最小加加速度(m/s^3)
+  jerk_max: 1.5    # 最大加加速度(m/s^3)
+  df_dot_min: -5  # 最小前轮转向角速度
+  df_dot_max: 5   # 最大前轮转向角速度
+
+# 模型类型
+model_type: "kinematics" # "kinematics", "dynamics"
+# model_type: "dynamics" # "kinematics", "dynamics"
